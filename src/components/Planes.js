@@ -1,37 +1,47 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import Card from './Card'
 
-const Post = ({ data }) => {
-  console.log(data)
-  const { title, body } = data;
-  return (
-    <article>
-      <h3>{title}</h3>
-      <p>{body}</p>
-    </article>
-  );
-};
 
-export default function Planes() {
-  const [selectedData, setSelectedData] = useState([]);
-  const [selectedValue, setSelectedValue] = useState([]);
+const options = [
+  { name: "Seguro Vida Activa", id: 58 },
+  { name: "Seguro Viaje Protegido", id: 59 },
+];
 
-  const handleChange = async (evt,id) => {
+const Planes = () => {
+  const [selectedData, setSelectedData] = useState(null);
+  const [selectedValue, setSelectedValue] = useState(null);
+
+  const handleChange = (evt,id) => {
     console.log('evt', evt.currentTarget)
     const { value } = evt.currentTarget;
     setSelectedValue(value);
-    const response = await axios.get(`https://dn8mlk7hdujby.cloudfront.net/interview/insurance/${id}/`)
-    console.log('response', response)
-    setSelectedData(response.data);
+    axios.get(`https://dn8mlk7hdujby.cloudfront.net/interview/insurance/${id}`)
+    .then((response) => 
+    setSelectedData(response.data));
   }
   return (
     <div className="">
        <select onChange={handleChange}>
-        <option id="58" value="">Seguro vida Activa</option>
-        <option id="59" value="">Seguro viaje Protegido</option>
+       {[
+            <option selected disabled hidden key="no-option" value={null}>
+              Seleccione una opción
+            </option>,
+            ...options.map(({ name, id }) => (
+              <option key={`option-${id}`} value={id}>
+                {name}
+              </option>
+            )),
+          ]}
       </select>
-      {selectedData.length > 0 && <Post data={selectedData[selectedValue]} />}
+      <button onClick={handleChange}>Buscar</button>
+
+      <div className="container">
+
+      {selectedData && <Card value={selectedData[selectedValue]} />}
+      </div>
     </div>
   )
   
 }
+export default Planes
