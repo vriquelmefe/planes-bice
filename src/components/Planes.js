@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState} from 'react'
 import axios from 'axios'
 import Card from './Card'
 
@@ -12,19 +12,25 @@ const Planes = () => {
   const [selectedData, setSelectedData] = useState(null);
   const [selectedValue, setSelectedValue] = useState(null);
 
-  const handleChange = (evt,id) => {
-    console.log('evt', evt.currentTarget)
+  const handleSubmit = async(evt) => {
+    evt.preventDefault();
+    console.log('evt', evt.target)
     const { value } = evt.currentTarget;
+    console.log('value',value)
     setSelectedValue(value);
-    axios.get(`https://dn8mlk7hdujby.cloudfront.net/interview/insurance/${id}`)
-    .then((response) => 
-    setSelectedData(response.data));
+    const response = await axios.get(`https://dn8mlk7hdujby.cloudfront.net/interview/insurance/${value}`)
+    console.log('response', response)
+    if(response.data.length > 0){
+      setSelectedData(response.data);
+    }
   }
   return (
     <div className="">
-       <select onChange={handleChange}>
-       {[
-            <option selected disabled hidden key="no-option" value={null}>
+      <form onSubmit={handleSubmit}>
+       <select defaultValue={'DEFAULT'}>
+       {[ 
+         
+            <option disabled key="DEFAULT" value='DEFAULT'>
               Seleccione una opción
             </option>,
             ...options.map(({ name, id }) => (
@@ -34,7 +40,8 @@ const Planes = () => {
             )),
           ]}
       </select>
-      <button onClick={handleChange}>Buscar</button>
+      <button >Buscar</button>
+      </form>
 
       <div className="container">
 
