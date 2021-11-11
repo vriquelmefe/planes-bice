@@ -1,17 +1,19 @@
 import React from "react";
+import './style.css'
 
-const Card = (props) => {
-  const { name, description, price, image } = props;
+const Card = (data) => {
+  console.log('data', data.data)
+  const { name, description, price, image } = data.data;
 
   return (
     <div>
-      <div className="template">
-        <div className="image">
-          <img src={image} alt="img" />
+      <div className="base">
+        <img className="imagen" src={image} alt="img" />
+        <label className="label label-text">{price}</label>
+        <div className="cardbox">
+          <p className="titulo">{name}</p>
+          <p className="parrafo">{description}</p>
         </div>
-        <div className="price">{price}</div>
-        <div className="name">{name}</div>
-        <div className="description">{description}</div>
       </div>
     </div>
   );
