@@ -20,12 +20,11 @@ export default function Planes() {
   }
   const handleClick = async () => {
     const response = await axios.get(`https://dn8mlk7hdujby.cloudfront.net/interview/insurance/${selectedValue}`)
-    console.log('response', response.data.insurance)
     setSelectedData(response.data.insurance);
   }
   
   return (
-    <div>
+    <div className="container">
        <select onChange={handleChange}  className="select select-disable" defaultValue={'DEFAULT'}>
        {[ 
          

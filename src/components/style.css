@@ -10,7 +10,12 @@
   margin-left: .5em;
   margin-top: -20px;
 }
-
+.margin-card{
+  margin-left: -2rem;
+}
+.imagen-nav{
+  margin-right: 2rem;
+}
 .titulo {
   width: 216px;
   height: 24px;
@@ -31,7 +36,6 @@
 .parrafo {
   width: 51px;
   height: 24px;
-  font-family: Poppins;
   font-weight: normal;
   font-size: 14px;
   line-height: 24px;
@@ -55,16 +59,15 @@
 }
 
 .label-text {
-  font-family: Poppins;
   font-weight: 600;
-  font-size: 14px;
+  font-size: .65em;
   line-height: 16px;
   letter-spacing: -0.2px;
   padding: 3px;
   color: #F5F7FA;
   position: relative;
-  top: -2.8em;
-  margin-left: .5em;
+  top: -3.5em;
+  margin-left: .7em;
 }
 
 .boton {
